@@ -34,4 +34,13 @@ function initialize() {
 }
 
 
-//getAllSets
+//getAllSets : to return the complete sets array
+function getAllSets() {
+    return new Promise((resolve, reject) => {
+        try {
+            resolve(sets); // Resolve with the current sets array
+        } catch (err) {
+            reject(`Failed to get all sets: ${err.message}`); // Reject with an error message if something goes wrong
+        }
+    });
+}
