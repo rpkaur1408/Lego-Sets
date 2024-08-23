@@ -44,3 +44,25 @@ function getAllSets() {
         }
     });
 }
+
+//getSetByNum(setNum) : to return set object  with the set_num specified
+function getSetByNum(setNum) {
+    return new Promise((resolve, reject) => {
+        // Find the set with the matching set_num
+        const set = sets.find(set => set.set_num === setNum);
+
+        // If set is found, resolve with the set; otherwise, reject with an error message
+        if (set) {
+            resolve(set);
+        } else {
+            reject(`Unable to find set with number: ${setNum}`);
+        }
+    });
+}
+
+//getSetsByTheme(theme) : to find sets with the expected theme
+function getSetsByTheme(theme){
+    return new Promise((resolve,reject)=>{
+        
+    })
+}
