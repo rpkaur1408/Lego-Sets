@@ -61,8 +61,22 @@ function getSetByNum(setNum) {
 }
 
 //getSetsByTheme(theme) : to find sets with the expected theme
-function getSetsByTheme(theme){
-    return new Promise((resolve,reject)=>{
-        
-    })
+function getSetsByTheme(theme) {
+    return new Promise((resolve, reject) => {
+        try {
+            // Convert the theme parameter to lower case for case-insensitive comparison
+            const lowerCaseTheme = theme.toLowerCase();
+
+            // Filter sets to find those where the theme matches the input
+            const result = sets.filter(set => 
+                set.theme.toLowerCase().includes(lowerCaseTheme)
+            );
+
+            // Resolve with the filtered results
+            resolve(result);
+        } catch (err) {
+            // Reject with an error message if something goes wrong
+            reject(`Failed to get sets with theme: ${theme}`);
+        }
+    });
 }
