@@ -3,7 +3,7 @@ const setData = require("../data/setData");
 const themeData = require("../data/themeData");
 
 //Empty array for sets
-let sets =[];
+let sets = [];
 
 //intialise function to fill sets array with the data
 function initialize() {
@@ -68,7 +68,7 @@ function getSetsByTheme(theme) {
             const lowerCaseTheme = theme.toLowerCase();
 
             // Filter sets to find those where the theme matches the input
-            const result = sets.filter(set => 
+            const result = sets.filter(set =>
                 set.theme.toLowerCase().includes(lowerCaseTheme)
             );
 
@@ -112,3 +112,10 @@ initialize()
         console.error(error);
     });
 
+//exporting modules
+module.exports = {
+    initialize,
+    getAllSets,
+    getSetByNum,
+    getSetsByTheme
+}
