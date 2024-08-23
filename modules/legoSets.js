@@ -81,36 +81,6 @@ function getSetsByTheme(theme) {
     });
 }
 
-//Testing our fuctions
-// Test the functions
-initialize()
-    .then(() => {
-        console.log("Initialization complete");
-
-        // Test getAllSets
-        return getAllSets();
-    })
-    .then(allSets => {
-        console.log("All Sets:");
-        console.log(allSets);
-
-        // Test getSetByNum
-        return getSetByNum("1031-1");
-    })
-    .then(specificSet => {
-        console.log("\nSet with number '1031-1':");
-        console.log(specificSet);
-
-        // Test getSetsByTheme
-        return getSetsByTheme("tech");
-    })
-    .then(technicSets => {
-        console.log("\nSets with theme containing 'tech':");
-        console.log(technicSets);
-    })
-    .catch(error => {
-        console.error(error);
-    });
 
 //exporting modules
 module.exports = {
