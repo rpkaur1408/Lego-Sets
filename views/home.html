@@ -1,11 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="/public/css/main.css">
+    <link rel="stylesheet" href="/public/css/tailwind.css">
+    <title>Lego Collection</title>
 </head>
+
 <body>
-    
+    <!-- NavBar -->
+    <nav>
+        <div class="navbar bg-base-100">
+            <div class="flex-1">
+                <a class="btn btn-ghost text-xl">Lego Collection</a>
+            </div>
+            <div class="flex-none">
+                <ul class="menu menu-horizontal px-1">
+                    <li><a href="./about.html">About</a></li>
+                    <li>
+                        <details>
+                            <summary>Theme</summary>
+                            <ul class="bg-base-100 rounded-t-none p-2">
+                                <li><a href="/lego/sets?theme=Technic">Technic</a></li>
+                                <li><a href="/lego/sets?theme=Classic Town">Classic Town</a></li>
+                                <li><a href="/lego/sets?theme=Supplemental">Supplemental</a></li>
+                            </ul>
+                        </details>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto">
+        <div class="hero bg-base-200 min-h-screen">
+            <div class="hero-content flex-col lg:flex-row">
+              <img
+                src="/public/Images/lego.webp"
+                class="max-w-sm rounded-lg shadow-2xl" />
+              <div>
+                <h1 class="text-5xl font-bold">Welcome!</h1>
+                <p class="py-6">
+                    Unleash your inner builder and embark on a fascinating journey through the colorful realm of Lego.
+                </p>
+                <button class="btn btn-primary">Get Started Now</button>
+              </div>
+            </div>
+          </div>
+      </div>
 </body>
+
 </html>
