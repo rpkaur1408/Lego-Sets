@@ -4,6 +4,8 @@ const HTTP_PORT = process.env.PORT || 8080;
 
 const legoData = require("./modules/legoSets");
 
+app.use(express.static('public'));  
+
 //Running Port
 legoData.initialize().then(() => {
     app.listen(PORT, () => {
