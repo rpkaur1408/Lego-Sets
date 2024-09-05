@@ -17,35 +17,41 @@ legoData.initialize().then(() => {
 
 // Defining Routes
 app.get("/", (req, res) => {
-    res.send("Lego Set");
+    res.sendFile(path.join(__dirname,'views','home.html'));
 });
 
-app.get("/lego/sets", (req, res) => {
-    legoData.getAllSets()
-        .then(data => res.json(data))
-        .catch(err => res.status(500).send(`Error: ${err.message}`)); // Handle errors
+// GET "/about"
+// This route sends back the about.html file
+app.get('/about', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'about.html'));
 });
 
-app.get("/lego/sets/num-demo", (req, res) => {
-    legoData.getSetByNum("10311-1")
-        .then(data => {
-            if (data) {
-                res.json(data);
-            } else {
-                res.status(404).send("Set Not found");
-            }
-        })
-        .catch(err => res.status(500).send(`Error: ${err.message}`)); // Handle errors
+
+app.get('/lego/sets', (req, res) => {
+    const theme = req.query.theme;
+    if (theme) {
+        legoData.getSetsByTheme(theme)
+            .then(sets => res.json(sets))
+            .catch(error => res.status(404).send(error.message));
+    } else {
+        legoData.getAllSets()
+            .then(sets => res.json(sets))
+            .catch(error => res.status(404).send(error.message));
+    }
+});
+// GET "/lego/sets/:set_num"
+// This route responds with the Lego set that matches the set_num
+app.get('/lego/sets/:set_num', (req, res) => {
+    const setNum = req.params.set_num;
+    legoData.getSetByNum(setNum)
+        .then(set => res.json(set))
+        .catch(error => res.status(404).send(error.message));
 });
 
-app.get("/lego/sets/theme-demo", (req, res) => {
-    legoData.getSetsByTheme("tech")
-        .then(data => {
-            if (data.length > 0) {
-                res.json(data);
-            } else {
-                res.status(404).send("No sets found with this theme");
-            }
-        })
-        .catch(err => res.status(500).send(`Error: ${err.message}`)); // Handle errors
+// Custom 404 Error Page
+app.use((req, res) => {
+    res.status(404).sendFile(path.join(__dirname, 'views', '404.html'));
 });
+
+//For Vercel
+module.exports = app;
