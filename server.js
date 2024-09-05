@@ -1,11 +1,13 @@
+const path = require('path');
+
 const express = require("express");
 const app = express();
 const HTTP_PORT = process.env.PORT || 8080;
 
 const legoData = require("./modules/legoSets");
 
-app.use(express.static('public'));
 
+app.use(express.static(__dirname + '/public'));
 // Running Port
 legoData.initialize().then(() => {
     app.listen(HTTP_PORT, () => {  // Changed PORT to HTTP_PORT
