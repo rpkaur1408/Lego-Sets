@@ -3,9 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>About Me</title>
 </head>
 <body>
+    <nav>
+        <div class="navbar bg-base-100">
+            <div class="flex-1">
+                <a class="btn btn-ghost text-xl" href="/">Lego Collection</a>
+            </div>
+            <div class="flex-none">
+                <ul class="menu menu-horizontal px-1">
+                    <li><a href="/about" class="active">About</a></li>
+                    <li>
+                        <details>
+                            <summary>Theme</summary>
+                            <ul class="bg-base-100 rounded-t-none p-2">
+                                <li><a href="/lego/sets?theme=Technic">Technic</a></li>
+                                <li><a href="/lego/sets?theme=Classic Town">Classic Town</a></li>
+                                <li><a href="/lego/sets?theme=Supplemental">Supplemental</a></li>
+                            </ul>
+                        </details>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
     
+
+    <!-- Hero element  -->
+
+    <div class="hero bg-base-200 min-h-screen">
+        <div class="hero-content flex-col lg:flex-row">
+          <img
+            src="https://img.daisyui.com/images/stock/photo-1635805737707-575885ab0820.webp"
+            class="max-w-sm rounded-lg shadow-2xl" />
+          <div>
+            <h1 class="text-5xl font-bold">About Me</h1>
+            <p class="py-6">
+              Get to know Me. 
+            </p>
+            <button class="btn btn-primary">Get Started</button>
+          </div>
+        </div>
+      </div>
 </body>
 </html>

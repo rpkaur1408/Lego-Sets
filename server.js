@@ -4,16 +4,16 @@ const HTTP_PORT = process.env.PORT || 8080;
 
 const legoData = require("./modules/legoSets");
 
-app.use(express.static('public'));  
+app.use(express.static('public'));
 
-//Running Port
+// Running Port
 legoData.initialize().then(() => {
-    app.listen(PORT, () => {
-        console.log(`Server is running on port ${PORT}`);
+    app.listen(HTTP_PORT, () => {  // Changed PORT to HTTP_PORT
+        console.log(`Server is running on port ${HTTP_PORT}`);
     });
 }).catch(err => {
     console.error("Failed to initialize Lego data:", err);
-})
+});
 
 // Defining Routes
 app.get("/", (req, res) => {
@@ -38,7 +38,7 @@ app.get("/lego/sets/num-demo", (req, res) => {
         .catch(err => res.status(500).send(`Error: ${err.message}`)); // Handle errors
 });
 
-app.get("/lego/sets/theme-demo", (req, res) => {  // Fixed the order of req and res
+app.get("/lego/sets/theme-demo", (req, res) => {
     legoData.getSetsByTheme("tech")
         .then(data => {
             if (data.length > 0) {
