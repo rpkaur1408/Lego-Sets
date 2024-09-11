@@ -4,7 +4,7 @@ const path = require('path');
 
 // Initialize Express app
 const app = express();
-app.use(express.static('public')); 
+app.use(express.static(__dirname + '/public'));  
 const PORT = 8080;
 
 // Initialize the Lego data before starting the server
