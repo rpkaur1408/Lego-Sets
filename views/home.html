@@ -1,28 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/main.css">  <!-- Corrected path -->
-    <link rel="stylesheet" href="/css/tailwind.css">  <!-- Corrected path -->
-    <title>Lego Collection</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <title>About Me</title>
 </head>
-
 <body>
-    <!-- NavBar -->
+    <!-- Navigation Bar -->
     <nav>
-        <div class="navbar bg-base-100">
+        <div class="navbar bg-base-100 shadow-md">
             <div class="flex-1">
-                <a class="btn btn-ghost text-xl" href="/">Lego Collection</a>
+                <a class="btn btn-ghost normal-case text-2xl font-bold" href="/">Lego Collection</a>
             </div>
             <div class="flex-none">
-                <ul class="menu menu-horizontal px-1">
-                    <li><a href="./about.html">About</a></li>
+                <ul class="menu menu-horizontal px-4 space-x-4">
+                    <li><a href="/about" class="active">About</a></li>
                     <li>
-                        <details>
-                            <summary>Theme</summary>
-                            <ul class="bg-base-100 rounded-t-none p-2">
+                        <details class="dropdown dropdown-hover">
+                            <summary class="btn btn-ghost">Theme</summary>
+                            <ul class="p-2 shadow bg-base-100 dropdown-content rounded-box w-48">
                                 <li><a href="/lego/sets?theme=Technic">Technic</a></li>
                                 <li><a href="/lego/sets?theme=Classic Town">Classic Town</a></li>
                                 <li><a href="/lego/sets?theme=Supplemental">Supplemental</a></li>
@@ -34,77 +31,37 @@
         </div>
     </nav>
 
+    <!-- Compact Hero Section -->
+    <div class="container mx-auto p-4">
+        <div class="hero bg-base-200 rounded-lg p-6 mb-8 shadow-md">
+            <div class="hero-content text-center">
+                <div class="max-w-lg mx-auto">
+                    <h1 class="text-4xl font-semibold text-gray-800">About Me</h1>
+                    <p class="py-4 text-md text-gray-600">Get to know the developer behind the scenes.</p>
+                </div>
+            </div>
+        </div>
 
-    <!-- Hero -->
-    <div class="container mx-auto">
-        <div class="hero bg-base-200 min-h-screen">
-            <div class="hero-content flex-col lg:flex-row">
-              <img
-                src="/Images/lego.webp"
-                class="max-w-sm rounded-lg shadow-2xl" />
-              <div>
-                <h1 class="text-5xl font-bold">Welcome!</h1>
-                <p class="py-6">
-                    Lets build the blocks of life and discover the world of Legos!!!
+        <!-- Content Section -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Left Column: Image -->
+            <div class="flex justify-center">
+                <img
+                    src="/images/Me.jpg"
+                    alt="Rehatpreet Kaur"
+                    class="rounded-lg shadow-lg w-64 h-64 object-cover"
+                />
+            </div>
+
+            <!-- Right Column: Text -->
+            <div class="flex items-center">
+                <p class="text-lg text-gray-700">
+                    Hi, I'm Rehatpreet Kaur. I enjoy building Lego sets, exploring new
+                    technologies, and learning new things. In my free time, I love
+                    reading, hiking, and playing video games.
                 </p>
-                <a href="/lego/sets" class="btn btn-primary">Explore Lego World</a>
-              </div>
             </div>
-          </div>
-      </div>
-
-      <!-- Grid system -->
-
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 hover: gap-4">
-
-        <!-- card 1 -->
-        <div class="card bg-base-100 hover:bg-base-300 active:bg-base-400 focus:outline-none focus:ring focus:ring-base-50 w-96 shadow-xl">
-            <figure>
-              <img
-                src="https://cdn.rebrickable.com/media/sets/1000565897-5.jpg"
-                alt="lego-1" />
-            </figure>
-            <div class="card-body">
-              <h2 class="card-title">Marvel Avengers - PS4,2016,742,0</h2>
-              <p>A classic Lego set that started it all. Perfect for collectors and enthusiasts.</p>
-              <div class="card-actions justify-end">
-                <button class="btn btn-primary">View Details</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- card 2 -->
-          <div class="card bg-base-100 w-96 shadow-xl">
-            <figure>
-              <img
-                src="https://cdn.rebrickable.com/media/sets/10156-1.jpg"
-                alt="Lego-2" />
-            </figure>
-            <div class="card-body">
-              <h2 class="card-title">LEGO Truck,2004,50,105</h2>
-              <p>A fun and engaging set that challenges your creativity and building skills.</p>
-              <div class="card-actions justify-end">
-                <button class="btn btn-primary">View Detials</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- card 3 -->
-          <div class="card bg-base-100 w-96 shadow-xl">
-            <figure>
-              <img
-                src="https://cdn.rebrickable.com/media/sets/10182-1.jpg"
-                alt="lego-3" />
-            </figure>
-            <div class="card-body">
-              <h2 class="card-title">Cafe Corner,2007,155,2058</h2>
-              <p>An advanced set for experienced builders, offering countless hours of fun.</p>
-              <div class="card-actions justify-end">
-                <button class="btn btn-primary">View Details</button>
-              </div>
-            </div>
-          </div>
-      </div>
+        </div>
+    </div>
 </body>
-
 </html>

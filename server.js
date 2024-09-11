@@ -1,25 +1,31 @@
+const express = require('express');
+const legoData = require('./modules/legoSets');
 const path = require('path');
 
-const express = require("express");
+// Initialize Express app
 const app = express();
-const HTTP_PORT = process.env.PORT || 8080;
+app.use(express.static('public')); 
+const PORT = 8080;
 
-const legoData = require("./modules/legoSets");
-
-
-app.use(express.static(__dirname + '/public'));
-// Running Port
-legoData.initialize().then(() => {
-    app.listen(HTTP_PORT, () => {  // Changed PORT to HTTP_PORT
-        console.log(`Server is running on port ${HTTP_PORT}`);
+// Initialize the Lego data before starting the server
+legoData.initialize()
+    .then(() => {
+        // Start the server only after initialization is complete
+        app.listen(PORT, () => {
+            console.log(`Server is running on port ${PORT}`);
+        });
+    })
+    .catch(error => {
+        console.error(`Failed to initialize Lego data: ${error}`);
     });
-}).catch(err => {
-    console.error("Failed to initialize Lego data:", err);
-});
 
-// Defining Routes
-app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname,'views','home.html'));
+// Middleware to parse JSON bodies (if needed in the future)
+app.use(express.json());
+
+// GET "/"
+// This route sends back the home.html file
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'home.html'));
 });
 
 // GET "/about"
@@ -28,7 +34,8 @@ app.get('/about', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'about.html'));
 });
 
-
+// GET "/lego/sets"
+// This route responds with Lego sets, filtered by theme if the query parameter is present
 app.get('/lego/sets', (req, res) => {
     const theme = req.query.theme;
     if (theme) {
@@ -41,6 +48,7 @@ app.get('/lego/sets', (req, res) => {
             .catch(error => res.status(404).send(error.message));
     }
 });
+
 // GET "/lego/sets/:set_num"
 // This route responds with the Lego set that matches the set_num
 app.get('/lego/sets/:set_num', (req, res) => {
@@ -55,5 +63,5 @@ app.use((req, res) => {
     res.status(404).sendFile(path.join(__dirname, 'views', '404.html'));
 });
 
-//For Vercel
-module.exports = app;
+// Required for vercel 
+module.exports = app

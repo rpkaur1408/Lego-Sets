@@ -1,11 +1,13 @@
-//TO read our data files
+// Import the required data files
 const setData = require("../data/setData");
 const themeData = require("../data/themeData");
 
-//Empty array for sets
+// Initialize the sets array
 let sets = [];
 
-//intialise function to fill sets array with the data
+/*
+* Initialize the sets array by combining setData and themeData.
+*/
 function initialize() {
     return new Promise((resolve, reject) => {
         try {
@@ -26,66 +28,102 @@ function initialize() {
                 sets.push(setWithTheme);
             });
 
-            resolve(); // Properly invoke resolve to indicate completion
-        } catch (err) {
-            reject(`Initialization Error: ${err.message}`); // Reject with an error message
+            resolve();
+        } catch (error) {
+            reject(`Initialization failed: ${error.message}`);
         }
     });
 }
 
-
-//getAllSets : to return the complete sets array
+/*
+ * Get all sets.
+*/
 function getAllSets() {
     return new Promise((resolve, reject) => {
         try {
-            resolve(sets); // Resolve with the current sets array
-        } catch (err) {
-            reject(`Failed to get all sets: ${err.message}`); // Reject with an error message if something goes wrong
+            resolve(sets);
+        } catch (error) {
+            reject(`Failed to get all sets: ${error.message}`);
         }
     });
 }
 
-//getSetByNum(setNum) : to return set object  with the set_num specified
+/**
+ * Get a specific set by its set number.
+ * @param {string} setNum - The set number to search for.
+ * @returns {Promise<Object>} A promise that resolves with the set object or rejects with an error message.
+ */
 function getSetByNum(setNum) {
     return new Promise((resolve, reject) => {
-        // Find the set with the matching set_num
-        const set = sets.find(set => set.set_num === setNum);
-
-        // If set is found, resolve with the set; otherwise, reject with an error message
-        if (set) {
-            resolve(set);
-        } else {
-            reject(`Unable to find set with number: ${setNum}`);
+        try {
+            const set = sets.find(set => set.set_num === setNum);
+            if (set) {
+                resolve(set);
+            } else {
+                reject(`Unable to find requested set: ${setNum}`);
+            }
+        } catch (error) {
+            reject(`Failed to get set by number: ${error.message}`);
         }
     });
 }
 
-//getSetsByTheme(theme) : to find sets with the expected theme
+/**
+ * Get sets by theme.
+ * The theme parameter can be a partial string and case is ignored.
+ * @param {string} theme - The theme to search for.
+ * @returns {Promise<Array>} A promise that resolves with an array of set objects or rejects with an error message.
+ */
 function getSetsByTheme(theme) {
     return new Promise((resolve, reject) => {
         try {
-            // Convert the theme parameter to lower case for case-insensitive comparison
-            const lowerCaseTheme = theme.toLowerCase();
-
-            // Filter sets to find those where the theme matches the input
-            const result = sets.filter(set =>
-                set.theme.toLowerCase().includes(lowerCaseTheme)
-            );
-
-            // Resolve with the filtered results
-            resolve(result);
-        } catch (err) {
-            // Reject with an error message if something goes wrong
-            reject(`Failed to get sets with theme: ${theme}`);
+            const themeLowerCase = theme.toLowerCase();
+            const filteredSets = sets.filter(set => set.theme.toLowerCase().includes(themeLowerCase));
+            if (filteredSets.length > 0) {
+                resolve(filteredSets);
+            } else {
+                reject(`Unable to find requested sets with theme: ${theme}`);
+            }
+        } catch (error) {
+            reject(`Failed to get sets by theme: ${error.message}`);
         }
     });
 }
 
-
-//exporting modules
+// Export the functions to be used in other parts of the application
 module.exports = {
     initialize,
     getAllSets,
     getSetByNum,
     getSetsByTheme
-}
+};
+
+// Test the functions
+initialize()
+    .then(() => {
+        console.log("Initialization complete");
+
+        // Test getAllSets
+        return getAllSets();
+    })
+    .then(allSets => {
+        console.log("All Sets:");
+        console.log(allSets);
+
+        // Test getSetByNum
+        return getSetByNum("001-1");
+    })
+    .then(specificSet => {
+        console.log("\nSet with number '001-1':");
+        console.log(specificSet);
+
+        // Test getSetsByTheme
+        return getSetsByTheme("tech");
+    })
+    .then(technicSets => {
+        console.log("\nSets with theme containing 'tech':");
+        console.log(technicSets);
+    })
+    .catch(error => {
+        console.error(error);
+    });
